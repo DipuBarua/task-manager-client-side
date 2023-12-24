@@ -1,11 +1,37 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const CreateTask = () => {
     const { register, handleSubmit, reset } = useForm();
+    const axiosPublic = useAxiosPublic();
 
     const onSubmit = (data) => {
         console.log(data);
+
+        const taskInfo = {
+            title: data.title,
+            description: data.description,
+            tag: data.tag,
+            deadline: data.deadline,
+        }
+        axiosPublic.post("/tasks", taskInfo)
+            .then(res => {
+                console.log("taskInfo:", res.data);
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Your task has been saved",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    reset();
+                }
+            })
+            .catch(error => console.error(error));
+
     }
 
     return (
@@ -41,7 +67,7 @@ const CreateTask = () => {
                                 <textarea type="text" {...register("description", { required: true })} placeholder="Description" className="textarea textarea-bordered textarea-md w-full max-w-xl" required />
                             </div>
 
-                            {/* description  */}
+                            {/* Deadline  */}
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Deadline</span>

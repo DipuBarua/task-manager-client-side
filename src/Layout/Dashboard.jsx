@@ -5,21 +5,10 @@ const Dashboard = () => {
     return (
         <div className=" flex">
             {/* Dashboard Slidebar  */}
-            <div className=" w-64 min-h-screen bg-orange-500">
-                <li className=" menu-title"> <p className=" text-2xl">Task Manager</p> manage your tasks</li>
+            <div className=" md:w-64 min-h-screen bg-slate-400">
+                <li className=" menu-title"> <p className=" text-2xl">Task Manager</p> Manage Your Tasks</li>
                 <ul className=" menu">
                     {
-                        // isAdmin ?
-                        //     <>
-                        //         <li>
-                        //             <NavLink to={'/dashboard/adminHome'}>
-                        //                 <FaHome className=""></FaHome>
-                        //                 Admin Home
-                        //             </NavLink>
-                        //         </li>
-
-                        //     </>
-                        //     :
                         <>
                             <li>
                                 <NavLink to={'/dashboard/createTask'}>

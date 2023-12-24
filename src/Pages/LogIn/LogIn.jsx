@@ -1,12 +1,15 @@
 import { Helmet } from "react-helmet-async";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import GoogleSignIn from "../Shared/GoogleSignUp/GoogleSignIn";
 
 const LogIn = () => {
 
     const { logIn } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+    console.log(location);
 
     const handleLogIn = (e) => {
         e.preventDefault();
@@ -19,14 +22,17 @@ const LogIn = () => {
         logIn(email, password)
             .then(res => {
                 console.log(res.user);
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Successfully Log In",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                navigate("/");
+                // Swal.fire({
+                //     position: "top-end",
+                //     icon: "success",
+                //     title: "Successfully Log In",
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // });
+
+                const destination = location.state?.from?.pathname || "/";
+                navigate(destination, { replace: true });
+
             })
             .catch(error => console.error(error));
     }
@@ -64,8 +70,8 @@ const LogIn = () => {
                             <input type="submit" value="LogIn" className="btn btn-outline hover:bg-blue-600 rounded-none text-xl" />
                         </div>
 
-                        {/* SocialLogin */}
-                        {/* <GoogleLogin></GoogleLogin> */}
+                        {/* Google signIn  */}
+                        <GoogleSignIn></GoogleSignIn>
 
                         <div className=" border border-black p-2">
                             <p>Have an account? if no, please <Link to={'/signup'}><button className="btn-link font-semibold text-blue-600">Sign Up</button></Link></p>

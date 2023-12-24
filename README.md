@@ -16,3 +16,5 @@
 - AOS
 - react hook form
 - sweetalert2
+- axios
+- tanstack query

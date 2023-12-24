@@ -6,12 +6,15 @@ import CreateTask from "../Pages/Dashboard/CreateTask/CreateTask";
 import TaskList from "../Pages/Dashboard/TaskList/TaskList";
 import SignUp from "../Pages/SignUp/SignUp";
 import LogIn from "../Pages/LogIn/LogIn";
+import PrivateRouter from "./PrivateRouter";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 
 const routes = createBrowserRouter([
     {
         path: "/",
         element: <Root></Root>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: "/",
@@ -29,7 +32,8 @@ const routes = createBrowserRouter([
     },
     {
         path: "dashboard",
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRouter><Dashboard></Dashboard></PrivateRouter>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: "createTask",

@@ -1,12 +1,15 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { signUp, updateUser } = useAuth();
+    const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
         console.log(data);
@@ -21,17 +24,35 @@ const SignUp = () => {
         // update user profile
         updateUser(data.name, data.photo)
             .then(res => {
-                console.log(res.user)
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Your account has been created successfully",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                console.log(res);
+                reset();
+
+                const userProfile = {
+                    name: data.name,
+                    email: data.email,
+                    image: data.photo,
+                }
+
+                axiosPublic.post("/users", userProfile)
+                    .then(res => {
+                        console.log("user signup", res.data);
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Your account has been created successfully",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            navigate("/");
+                        }
+                    })
+
             })
             .catch(error => console.log(error));
-        reset();
+
+
+
     }
 
     return (

@@ -1,6 +1,7 @@
 import task_banner from "../../assets/task_banner.jpg"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Link } from "react-router-dom";
 
 const Banner = () => {
 
@@ -22,7 +23,9 @@ const Banner = () => {
 
 
                     <div data-aos="flip-left">
-                        <button className="btn btn-warning rounded-full min-h-32 min-w-32 font-bold border-2 border-white text-xl">Let’s <br />Explore</button>
+                        <Link to={'/dashboard/taskList'}>
+                            <button className="btn btn-warning rounded-full min-h-32 min-w-32 font-bold border-2 border-white text-xl">Let’s <br />Explore</button>
+                        </Link>
                     </div>
 
 
