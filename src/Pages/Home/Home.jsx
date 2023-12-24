@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import Navbar from "../Shared/Navbar/Navbar";
-import Footer from "../Shared/Footer/Footer";
+import Banner from "../Banner/Banner";
 
 const Home = () => {
     return (
@@ -9,10 +8,8 @@ const Home = () => {
                 <title>Task Manager | Home</title>
             </Helmet>
 
-            <Navbar></Navbar>
-            <p className=" text-3xl">This is home page</p>
+            <Banner></Banner>
 
-            <Footer></Footer>
         </div>
     );
 };
