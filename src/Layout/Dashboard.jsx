@@ -1,4 +1,4 @@
-import { FaHome, FaTasks } from "react-icons/fa";
+import { FaHome, FaPen, FaTasks } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
@@ -12,7 +12,7 @@ const Dashboard = () => {
                         <>
                             <li>
                                 <NavLink to={'/dashboard/createTask'}>
-                                    <FaTasks className=""></FaTasks>
+                                    <FaPen></FaPen>
                                     Create Task
                                 </NavLink>
                             </li>
